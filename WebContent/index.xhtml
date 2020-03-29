@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+
+
+		<p:dialog header="Projeto Pessoa" widgetVar="dlg2" modal="true"
+			height="100" visible="true" footer="Gerenciamento de pessoas">
+			<p:messages id="message2" showDetail="true"
+						autoUpdate="true" closable="true" globalOnly="false" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Usuario:" />
+				<h:inputText value="#{LoginBean.usuarioTXT}" />
+				<h:outputText value="senha:" />
+				<h:inputSecret value="#{LoginBean.senhaTXT}" />
+
+				<p:commandButton value="Entrar" actionListener="#{LoginBean.entrar}" update="message2" />
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

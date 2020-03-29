@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html; charset=UTF-8">
+<h:head>
+
+</h:head>
+
+<h:body>
+	<h:form id="Cadastro" acceptcharset= "UTF-8">
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+		<p:panelGrid id="grid1" style="width: 50%">
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Nome: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:inputText id="nome" value="#{PessoaBean.pessoa.nome}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="CPF: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:inputMask id="cpf" mask="999.999.999-99" value="#{PessoaBean.pessoa.cpf}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Idade: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:inputText for="idade" id="idade" size="3"
+						value="#{PessoaBean.pessoa.idade}" required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Senha: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:password for = "senha" id="senha" value="#{PessoaBean.pessoa.senha}"
+						required="true" match="confirmarsenha"  />
+						<p:message for="senha" display="messages" detail = "As senhas devem ser iguais"/>
+						
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Confirmar Senha: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:password for="confirmarsenha" id="confirmarsenha" value="#{PessoaBean.confirmaSenha}"
+						required="true"  />
+						
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Sexo: " />
+				</p:column>
+				<p:column colspan="2" style="width:40px">
+					<p:selectOneMenu style="width:125px"
+						value="#{PessoaBean.pessoa.sexo}">
+						<f:selectItem itemLabel="Masculino" itemValue="MASCULINO" />
+						<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
+					</p:selectOneMenu>
+
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column colspan="4">
+					<p:panel id="panel2" header="Endereços">
+						<p:panelGrid columns="9" id="Endereco" var="endereco">
+							<h:outputLabel value="Logradouro: " />
+							<p:inputText size="25" value="#{PessoaBean.endereco.rua}" />
+							<h:outputLabel value="Numero: " />
+							<p:inputText size="4" value="#{PessoaBean.endereco.numero}" />
+							<h:outputLabel value="Complemento: " />
+							<p:inputText size="25" value="#{PessoaBean.endereco.complemento}" />
+							<h:outputLabel value="CEP: " />
+							<p:inputMask size="6" mask="99999-999" value="#{PessoaBean.CEP}" />
+							<p:commandButton value="BuscarCEP" update="Endereco"
+								actionListener="#{PessoaBean.cepBusca}" />
+							<p:commandButton value="Adicionar" update="enderecos"
+								actionListener="#{PessoaBean.adicionarEndereco}" />
+						</p:panelGrid>
+						<p:dataTable id="enderecos" var="endereco"
+							value="#{PessoaBean.pessoa.enderecos}">
+							<p:column headerText="Logradouro">
+								<h:outputText value="#{endereco.rua}" />
+							</p:column>
+							<p:column headerText="Numero">
+								<h:outputText value="#{endereco.numero}" />
+							</p:column>
+							<p:column headerText="Complemento">
+								<h:outputText value="#{endereco.complemento}" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="2">
+					<p:commandButton value="Salvar" update="@form"
+						actionListener="#{PessoaBean.salvar}" resetValues="panel2,grid1" />
+				</p:column>
+				<p:column>
+					<p:commandButton value="Limpar" update="@form"
+						actionListener="#{PessoaBean.abrirManterPessoa}"
+						resetValues="panel2,grid1" immediate="true" />
+					<p:commandButton value="Pesquisar" style="margin-right:40px;"
+						actionListener="#{PessoaBean.abrirPesquisarPessoa}"
+						immediate="true" />
+
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</f:view>
+</html>
